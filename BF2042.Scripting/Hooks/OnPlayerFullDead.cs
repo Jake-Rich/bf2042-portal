@@ -1,7 +1,7 @@
 ﻿namespace BF2042.Scripting
 {
-    public class OnPlayerFullDead
+    public class OnPlayerFullDead : HookContext
     {
-        public PlayerValue DeadPlayer { get { return PlayerValue.EventPlayer.FromActionBlock( RuleEventType.OnPlayerIrreversiblyDead ); } }
+        public PlayerValue DeadPlayer { get { return PlayerValue.EventPlayer; } }
     }
 }

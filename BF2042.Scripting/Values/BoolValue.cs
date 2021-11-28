@@ -10,5 +10,25 @@
         {
 
         }
+
+        public static implicit operator BoolValue( bool state )
+        {
+            return new BoolValue( state );
+        }
+
+        public ActionValue IfTrue( ActionValue callback )
+        {
+            return Logic.IfTrue( this, callback );
+        }
+
+        public ActionValue IfFalse( ActionValue callback )
+        {
+            return Logic.IfFalse( this, callback );
+        }
+
+        public BoolValue Invert()
+        {
+            return new BoolValue( PortalInstruction.Not, this );
+        }
     }
 }

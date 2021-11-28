@@ -14,6 +14,11 @@ namespace BF2042.Scripting
             
         }
 
+        public static implicit operator NumberValue( double value )
+        {
+            return new NumberValue( value );
+        }
+
         public NumberValue Abs()
         {
             return new NumberValue( PortalInstruction.AbsNumber, this );

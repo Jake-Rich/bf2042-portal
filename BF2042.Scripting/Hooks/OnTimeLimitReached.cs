@@ -1,6 +1,6 @@
 ﻿namespace BF2042.Scripting
 {
-    public class OnTimeLimitReached
+    public class OnTimeLimitReached : HookContext
     {
 
     }

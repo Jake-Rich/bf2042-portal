@@ -1,7 +1,7 @@
 ﻿namespace BF2042.Scripting
 {
-    public class OnPlayerDowned
+    public class OnPlayerDowned : HookContext
     {
-        public PlayerValue DownedPlayer { get { return PlayerValue.EventPlayer.FromActionBlock( RuleEventType.OnMandown ); ; } }
+        public PlayerValue DownedPlayer { get { return PlayerValue.EventPlayer; } }
     }
 }

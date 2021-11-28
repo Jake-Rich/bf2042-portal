@@ -2,19 +2,19 @@
 
 namespace BF2042.Scripting
 {
-    public class ArrayValue<T> : CommonValue where T : CommonValue, new()
+    public class ArrayValue<T> : CommonValue where T : CommonValue
     {
         internal ArrayValue( PortalInstruction instruction, params CommonValue[] values ) : base( instruction, values )
         {
 
         }
 
-        public CommonValue First()
+        public T First()
         {
             return new CommonValue( PortalInstruction.Array_FirstOf, this );
         }
 
-        public CommonValue Last()
+        public T Last()
         {
             return new CommonValue( PortalInstruction.Array_Last, this );
         }
@@ -61,7 +61,7 @@ namespace BF2042.Scripting
 
         public T RandomValue()
         {
-            T value = new T();
+            T value = Activator.CreateInstance<T>();
             value.SetInstructions( PortalInstruction.Array_RandomizedArray, this );
             return value;
         }

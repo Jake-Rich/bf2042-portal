@@ -11,7 +11,7 @@ namespace BF2042.Scripting
         // Player
 
         EnableAllInputRestrictions,
-        EnaableInputRestriction,
+        EnableInputRestriction,
         ReplacePlayerInventory,
         ForceSwitchInventory,
         SetInventoryAmmo,
@@ -26,6 +26,11 @@ namespace BF2042.Scripting
         SetPlayerMaxHealth,
         SkipMandown,
         Teleport,
+        Kill,
+
+        // Chat
+
+        DisplayCustomMessage,
     }
 
     public enum RuleEventType

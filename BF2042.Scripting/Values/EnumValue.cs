@@ -16,6 +16,16 @@ namespace BF2042.Scripting
         {
             return new EnumValue<T>( value );
         }
+
+        public static EnumValue<T> CreateNullable<T>( T? value ) where T : struct, Enum
+        {
+            if ( value == null )
+            {
+                return null;
+            }
+
+            return new EnumValue<T>( value.Value );
+        }
     }
 
 }

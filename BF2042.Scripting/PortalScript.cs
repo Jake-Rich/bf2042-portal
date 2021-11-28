@@ -1,22 +1,20 @@
 ﻿namespace BF2042.Scripting
 {
-
-    public abstract class PortalScript<T> : PortalScript where T : VariableContext
+    public abstract class PortalScript<T> where T : VariableContext
     {
+        protected virtual bool StrictMode { get { return true; } }
+
         public T Variables { get; }
-    }
 
-    public abstract class PortalScript
-    {
-        public abstract void Setup();
+        public Hooks Hooks { get; } = new Hooks();
+
+        public abstract void Setup( ScriptOptions options );
 
         public ScriptContext ScriptContext { get; }
+    }
 
-        private BlocklyExporter _exporter;
-        private CodeRecorder _recorder;
-
-        public ScriptHooks Hooks { get; } = new ScriptHooks();
-
-        public ConditionScriptHooks Conditions { get; } = new ConditionScriptHooks();
+    public abstract class PortalScript : PortalScript<VariableContext>
+    {
+        
     }
 }

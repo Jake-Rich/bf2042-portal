@@ -7,14 +7,4 @@
             return new ArrayValue( PortalInstruction.GetAllPlayers );
         }
     }
-
-    public class VariableContext
-    {
-        
-    }
-
-    public class MyVariables : VariableContext
-    {
-        public UniversalValue OkThen { get; }
-    }
 }

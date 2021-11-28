@@ -19,9 +19,9 @@
 
         }
 
-        public VectorValue( double x, double y, double z ) : this( new NumberValue( x ), new NumberValue( y ), new NumberValue ( z ) )
+        public static VectorValue operator + ( VectorValue left, VectorValue right )
         {
-
+            return left.Add( right );
         }
 
         public NumberValue GetX()
@@ -52,6 +52,11 @@
         public PlayerValue GetFurthestPlayer( TeamValue team = null )
         {
             return new PlayerValue( PortalInstruction.FarthestPlayerFrom, this, team );
+        }
+
+        public VectorValue Add( VectorValue value )
+        {
+            return new VectorValue( PortalInstruction.Add_Vector, this, value );
         }
     }
 }

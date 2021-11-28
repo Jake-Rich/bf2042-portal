@@ -35,104 +35,117 @@
             return new NumberValue( PortalInstruction.GetInventoryMagazineAmmo, this, EnumValue.Create( slot ) );
         }
 
-        public void ApplyMedGadget( MedGadgetTypes type )
+        public ActionValue ApplyMedGadget( MedGadgetTypes type )
         {
-            CodeRecorder.AddAction( ActionBlockType.ApplyMedGadget, this, EnumValue.Create( type ) );
+            return new ActionValue( ActionBlockType.ApplyMedGadget, this, EnumValue.Create( type ) );
         }
 
-        public void SetDowned()
+        public ActionValue Down()
         {
-            CodeRecorder.AddAction( ActionBlockType.ForceMandown, this );
-        }
-
-        [Action]
-        public void Revive()
-        {
-            CodeRecorder.AddAction( ActionBlockType.ForceRevive, this );
+            return new ActionValue( ActionBlockType.ForceMandown, this );
         }
 
         [Action]
-        public void SetActiveSlot( InventorySlot slot )
+        public ActionValue Revive()
         {
-            CodeRecorder.AddAction( ActionBlockType.ForceSwitchInventory, this, EnumValue.Create( slot ) );
+            return new ActionValue( ActionBlockType.ForceRevive, this );
         }
 
         [Action]
-        public void SetAllInputRestrictions( BoolValue enabled )
+        public ActionValue SetActiveSlot( InventorySlot slot )
         {
-            CodeRecorder.AddAction( ActionBlockType.ForceSwitchInventory, this, enabled );
+            return new  ActionValue( ActionBlockType.ForceSwitchInventory, this, EnumValue.Create( slot ) );
         }
 
         [Action]
-        public void SetInputRestriction( InputRestrictions restriction, BoolValue state )
+        public ActionValue SetAllInputRestrictions( BoolValue enabled )
         {
-
+            return new ActionValue( ActionBlockType.ForceSwitchInventory, this, enabled );
         }
 
         [Action]
-        public void Resupply( ResupplyGadgetType type )
+        public ActionValue SetInputRestriction( InputRestrictions restriction, BoolValue state )
         {
-            
+            return new ActionValue( ActionBlockType.EnableInputRestriction, this, state );
         }
 
         [Action]
-        public void Heal( NumberValue amount, PlayerValue sourcePlayer = null )
+        public ActionValue Resupply( ResupplyGadgetType type )
         {
-
+            return new ActionValue( ActionBlockType.Resupply, this, EnumValue.Create( type ) );
         }
 
         [Action]
-        public void DealDamage( NumberValue amount, PlayerValue source = null )
+        public ActionValue Heal( NumberValue amount, PlayerValue sourcePlayer = null )
         {
-
+            return new ActionValue( ActionBlockType.Heal, this, amount, sourcePlayer );
         }
 
         [Action]
-        public void SetSoldierModel( SoldierModel model )
+        public ActionValue DealDamage( NumberValue amount, PlayerValue source = null )
         {
+            return new ActionValue( ActionBlockType.DealDamage, this, amount, source );
+        }
 
+        public ActionValue Kill()
+        {
+            return new ActionValue( ActionBlockType.Kill, this );
         }
 
         [Action]
-        public void SetMaxHealth( NumberValue amount )
+        public ActionValue SetSoldierModel( SoldierModel model )
         {
-
+            return new ActionValue( ActionBlockType.SetPlayerSoldier, this, EnumValue.Create( model ) );
         }
 
         [Action]
-        public void SetCanBeWounded( BoolValue state )
+        public ActionValue SetMaxHealth( NumberValue amount )
         {
-
+            return new ActionValue( ActionBlockType.SetPlayerMaxHealth, this, amount );
         }
 
         [Action]
-        public void Teleport( VectorValue position, NumberValue rotation = null )
+        public ActionValue SetCanBeWounded( BoolValue state )
+        {
+            return new ActionValue( ActionBlockType.ForceMandown, this, state );
+        }
+
+        [Action]
+        public ActionValue Teleport( VectorValue position, NumberValue rotation = null )
         {
             // Check if position null for just rotation
+            return new ActionValue( ActionBlockType.Teleport, this, position, rotation );
         }
 
         [Action]
-        public void SetRotation( NumberValue rotation )
+        public ActionValue SetRotation( NumberValue rotation )
         {
-            Teleport( null, rotation );
+            return Teleport( null, rotation );
         }
 
         [Action]
-        public void ReplaceInventory( ReplaceInventoryOptions options )
+        public ActionValue ReplaceInventory( ReplaceInventoryOptions options )
         {
-
+            return new ActionValue( ActionBlockType.ReplacePlayerInventory,
+                EnumValue.CreateNullable( options.Primary ),
+                EnumValue.CreateNullable( options.Secondary ),
+                EnumValue.CreateNullable( options.Speciality ),
+                EnumValue.CreateNullable( options.Gadget ),
+                EnumValue.CreateNullable( options.Grenade ),
+                EnumValue.CreateNullable( options.Melee )
+                );
         }
 
         [Action]
-        public void SetReserveAmmoCount( InventorySlot slot, NumberValue amount )
+        public ActionValue SetReserveAmmoCount( InventorySlot slot, NumberValue amount )
         {
-
+            return new ActionValue( ActionBlockType.SetInventoryAmmo, this, EnumValue.Create( slot ), amount );
         }
 
         [Action]
-        public void SetMagazineAmmoCount( InventorySlot slot, NumberValue amount )
+        public ActionValue SetMagazineAmmoCount( InventorySlot slot, NumberValue amount )
         {
-
+            return new ActionValue( ActionBlockType.SetInventoryMagazineAmmo, this, EnumValue.Create( slot ), amount );
         }
 
         #region Number Values

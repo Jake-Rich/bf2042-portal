@@ -17,6 +17,16 @@ namespace BF2042.Scripting
 
         }
 
+        public static implicit operator CommonValue( double value )
+        {
+            return new NumberValue( value );
+        }
+
+        public static implicit operator CommonValue( bool state )
+        {
+            return new BoolValue( state );
+        }
+
         internal void SetInstructions( PortalInstruction instruction, params CommonValue[] values )
         {
 
@@ -42,16 +52,6 @@ namespace BF2042.Scripting
         public override int GetHashCode()
         {
             throw new NotSupportedException( _equalsError );
-        }
-    }
-
-    public static class CommonValueEx
-    {
-        internal static T FromActionBlock<T>( this T value, RuleEventType type ) where T : CommonValue
-        {
-            throw new NotImplementedException();
-
-            return value;
         }
     }
 }

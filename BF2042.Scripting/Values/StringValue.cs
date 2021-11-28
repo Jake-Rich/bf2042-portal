@@ -10,5 +10,10 @@
         {
 
         }
+
+        public static implicit operator StringValue( string text )
+        {
+            return new StringValue( text );
+        }
     }
 }
