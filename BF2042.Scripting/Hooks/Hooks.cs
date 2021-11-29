@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace BF2042.Scripting
 {
@@ -9,68 +10,75 @@ namespace BF2042.Scripting
 
     public class Hooks
     {
-        private void ProcessHook<T>( Action<T> context ) where T : HookContext
-        {
-            throw new NotImplementedException();
+        private CodeRecorder _recorder;
 
-            //var context = Activator.CreateInstance<T>();
-            //
-            //BoolValue result = hook( context );
+        internal Hooks( CodeRecorder recorder )
+        {
+            _recorder = recorder;
         }
 
-        public void OnPlayerJoinedGame( Action<OnPlayerJoinGame> context ) 
+        private void ProcessHook<T>( RuleEventType type, Func<T, Function> func ) where T : HookContext
         {
-            ProcessHook( context );
+            T context = Activator.CreateInstance( type: typeof(T), bindingAttr: BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, null, null, null ) as T;
+
+            var actions = func.Invoke( context );
+
+            _recorder.RecordHook( type, actions );
+        }
+
+        public void OnPlayerJoinedGame( Func<OnPlayerJoinGame, Function> context ) 
+        {
+            ProcessHook( RuleEventType.OnPlayerJoinGame, context );
         }
         
-        public void OnPlayerLeftGame( Action<OnPlayerLeftGame> context )
+        public void OnPlayerLeftGame( Func<OnPlayerLeftGame, Function> context )
         {
-            ProcessHook( context );
+            ProcessHook( RuleEventType.OnPlayerLeaveGame, context );
         }
 
-        public void OnPlayerSpawned( Action<OnPlayerDeployed> context )
+        public void OnPlayerSpawned( Func<OnPlayerDeployed, Function> context )
         {
-            ProcessHook( context );
+            ProcessHook( RuleEventType.OnPlayerDeployed, context );
         }
 
-        public void OnPlayerDeath( Action<OnPlayerDied> context )
+        public void OnPlayerDeath( Func<OnPlayerDied, Function> context )
         {
-            ProcessHook( context );
+            ProcessHook( RuleEventType.OnPlayerDied, context );
         }
 
-        public void OnPlayerEarnsKill( Action<OnPlayerEarnsKill> context )
+        public void OnPlayerEarnsKill( Func<OnPlayerEarnsKill, Function> context )
         {
-            ProcessHook( context );
+            ProcessHook( RuleEventType.OnPlayerEarnedKill, context );
         }
 
-        public void OnPlayerDowned( Action<OnPlayerDowned> context )
+        public void OnPlayerDowned( Func<OnPlayerDowned, Function> context )
         {
-            ProcessHook( context );
+            ProcessHook( RuleEventType.OnMandown, context );
         }
 
-        public void OnPlayerRevived( Action<OnPlayerRevived> context )
+        public void OnPlayerRevived( Func<OnPlayerRevived, Function> context )
         {
-            ProcessHook( context );
+            ProcessHook( RuleEventType.OnRevived, context );
         }
 
-        public void OnTimeLimitReached( Action<OnTimeLimitReached> context )
+        public void OnTimeLimitReached( Func<OnTimeLimitReached, Function> context )
         {
-            ProcessHook( context );
+            ProcessHook( RuleEventType.OnTimeLimitReached, context );
         }
 
-        public void OnGameModeStarted( Action<OnGameModeStarted> context )
+        public void OnGameModeStarted( Func<OnGameModeStarted, Function> context )
         {
-            ProcessHook( context );
+            ProcessHook( RuleEventType.OnGameModeStarted, context );
         }
 
-        public void OnPlayerFullDead( Action<OnPlayerFullDead> context )
+        public void OnGameModeEnded( Func<OnGameModeEnded, Function> context )
         {
-            ProcessHook( context );
+            ProcessHook( RuleEventType.OnGameModeEnding, context );
         }
 
-        public void Example( Func<OnPlayerFullDead, Function> context )
+        public void OnPlayerFullDead( Func<OnPlayerFullDead, Function> context )
         {
-
+            ProcessHook( RuleEventType.OnPlayerIrreversiblyDead, context );
         }
     }
 }

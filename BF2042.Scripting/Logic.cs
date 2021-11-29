@@ -31,11 +31,21 @@ namespace BF2042.Scripting
     // This can do new() with curly brackets to act like a normal function scopes, interesting idea
     public class Function : ActionValue, IEnumerable<ActionValue>
     {
-        public List<ActionValue> Actions { get; } = new List<ActionValue>();
+        public Function()
+        {
+
+        }
+
+        public Function( ActionValue action )
+        {
+            Add( action );
+        }
+
+        internal List<ActionValue> Actions { get; } = new List<ActionValue>();
 
         public void Add( ActionValue value )
         {
-
+            Actions.Add( value );
         }
 
         public IEnumerator<ActionValue> GetEnumerator()
@@ -46,6 +56,14 @@ namespace BF2042.Scripting
         IEnumerator IEnumerable.GetEnumerator()
         {
             return Actions.GetEnumerator();
+        }
+    }
+
+    public class Condition : ActionValue
+    {
+        public Condition( BoolValue value )
+        {
+
         }
     }
 

@@ -1,7 +1,15 @@
 ﻿namespace BF2042.Scripting
 {
-    public enum PortalInstruction
+    internal enum PortalInstruction
     {
+        // Variables
+        SetVariableAtIndex,
+        VariableReferenceBlock,
+
+        // Enums
+        [EnumSelectionAttribute( "SoldierStateBoolItem", "SoliderStateBool" )]
+        Enum_SoldierStateBool,
+
         // Math
         AbsNumber,
         Add_Number,
@@ -94,7 +102,7 @@
         Array_FirstOf,
         Array_IsTrueForAll,
         Array_IsTrueForAny,
-        Array_Last,
+        Array_LastOf,
         Array_MappedArray,
         Array_RandomizedArray,
         Array_RandomValueInArray,

@@ -18,12 +18,12 @@
 
         public ActionValue IfTrue( ActionValue callback )
         {
-            return Logic.IfTrue( this, callback );
+            return new IfTrue( this ) { callback };
         }
 
         public ActionValue IfFalse( ActionValue callback )
         {
-            return Logic.IfFalse( this, callback );
+            return new IfFalse( this ) { callback };
         }
 
         public BoolValue Invert()

@@ -1,20 +1,28 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
 
 namespace BF2042.Scripting
 {
     public class CommonValue
     {
-        internal CodeRecorder _recorder;
+        internal PortalInstruction Instruction { get; private set; }
+        internal IReadOnlyCollection<CommonValue> Parameters { get; private set; }
 
-        public CommonValue( PortalInstruction instruction, params CommonValue[] values )
+        internal CommonValue( PortalInstruction instruction, params CommonValue[] values )
         {
             SetInstructions( instruction, values );
         }
 
-        public CommonValue()
+        internal CommonValue()
         {
 
+        }
+
+        internal static T Factory<T>() where T : CommonValue
+        {
+            return Activator.CreateInstance( type: typeof( T ), bindingAttr: BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance, null, null, null ) as T;
         }
 
         public static implicit operator CommonValue( double value )
@@ -29,7 +37,8 @@ namespace BF2042.Scripting
 
         internal void SetInstructions( PortalInstruction instruction, params CommonValue[] values )
         {
-
+            Instruction = instruction;
+            Parameters = values.ToArray();
         }
 
         public BoolValue IsEqual( CommonValue other )

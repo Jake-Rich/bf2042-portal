@@ -49,7 +49,7 @@ namespace BF2042.Scripting
         OnTimeLimitReached,
     }
 
-    public enum InventorySlot
+    public enum Enum_InventorySlots
     {
         Primary,
         Secondary,
@@ -59,52 +59,102 @@ namespace BF2042.Scripting
         Melee,
     }
 
-    public enum MedGadgetTypes
+    [Name( "Enum_MedGadgetTypes" )]
+    public enum Enum_MedGadgetTypes
     {
         MedicalCrate,
         MedKit,
     }
 
-    public enum ResupplyGadgetType
+    [EnumSelection( "ResupplyTypesItem", "ResupplyTypes" )]
+    public enum Enum_ResupplyTypes
     {
 
     }
 
-    public enum SoldierModel
+    [EnumSelection( "Enum_SoldierStateNumber", "SoldierStateBool" )]
+    public enum PlayerModelType
     {
 
     }
 
-    public enum PrimaryWeapon
+    [EnumSelection( "PrimaryWeaponsItem", "PrimaryWeaponsAlexandria" )]
+    public enum Enum_PrimaryWeapons
     {
 
     }
 
-    public enum SecondaryWeapon
+    [EnumSelection( "Enum_SoldierStateNumber", "SoldierStateBool" )]
+    public enum Enum_SecondaryWeapons
     {
+        BF3_Medic_RU,
+        BF3_Medic_US,
+        BF3_Engineer_RU,
+        BF3_Engineer_US,
+        BF3_Support_RU,
+        BF3_Support_US,
+        BF3_Recon_RU,
+        BF3_Recon_US,
 
+
+        BC2_Medic_RU,
+        BC2_Medic_US,
+        BC2_Engineer_RU,
+        BC2_Engineer_US,
+        BC2_Support_RU,
+        BC2_Support_US,
+        BC2_Recon_RU,
+        BC2_Recon_US,
+
+
+        US_1942_Medic,
+        US_1942_Support,
+        US_1942_Assault,
+        US_1942_Scout,
+        US_1942_AntiTank,
+        UK_1942_Medic,
+        UK_1942_Support,
+        UK_1942_Assault,
+        UK_1942_Scout,
+        UK_1942_AntiTank,
+        GE_1942_Medic,
+        GE_1942_Support,
+        GE_1942_Assault,
+        GE_1942_Scout,
+        GE_1942_AntiTank,
     }
 
+    [EnumSelection( "Enum_SoldierStateNumber", "SoldierStateBool" )]
     public enum SpecialityItem
     {
 
     }
 
-    public enum GadgetItem
+    [EnumSelection( "OpenGadgetsItem", "OpenGadgetsAlexandria" )]
+    public enum Enum_CharacterGadgets
     {
 
     }
 
-    public enum GrenadeItem
+    [EnumSelection( "ThrowablesItem", "ThrowablesAlexandria" )]
+    public enum Enum_Throwables
     {
 
     }
 
-    public enum MeleeItem
+    [EnumSelection( "Enum_SoldierStateNumber", "SoldierStateBool" )]
+    public enum Enum_MeleeWeapons
     {
 
     }
 
+    [EnumSelection( "Enum_SoldierStateNumber", "SoldierStateBool" )]
+    public enum Enum_Factions
+    {
+
+    }
+
+    [EnumSelection( "RestrictedInputsItem", "RestrictedInputs" )]
     public enum InputRestrictions
     {
         CameraPitch,
@@ -132,7 +182,8 @@ namespace BF2042.Scripting
         Zoom,
     }
 
-    internal enum PlayerValue_Bool
+    [EnumSelection( "SoldierStateNumberItem", "SoldierStateNumber" )]
+    internal enum Enum_SoldierStateBool
     {
         IsAI,
         IsAlive,
@@ -157,7 +208,8 @@ namespace BF2042.Scripting
         IsZoomingIn,
     }
 
-    internal enum PlayerValue_Number
+    [EnumSelection( "SoldierStateNumberItem", "SoldierStateNumber" )]
+    internal enum Enum_SoldierStateNumber
     {
         Health,
         InventoryAmmoCount,
@@ -167,7 +219,8 @@ namespace BF2042.Scripting
         Speed,
     }
 
-    internal enum PlayerValue_Vector
+    [EnumSelection( "SoldierStateVectorItem", "SoldierStateVector" )]
+    internal enum Enum_SoldierStateVector
     {
         LinearVelocity,
         Position,
@@ -176,11 +229,11 @@ namespace BF2042.Scripting
 
     public class ReplaceInventoryOptions
     {
-        public PrimaryWeapon? Primary;
-        public PrimaryWeapon? Secondary;
+        public Enum_PrimaryWeapons? Primary;
+        public Enum_PrimaryWeapons? Secondary;
         public SpecialityItem? Speciality;
-        public GadgetItem? Gadget;
-        public GrenadeItem? Grenade;
-        public MeleeItem? Melee;
+        public Enum_CharacterGadgets? Gadget;
+        public Enum_Throwables? Grenade;
+        public Enum_MeleeWeapons? Melee;
     }
 }

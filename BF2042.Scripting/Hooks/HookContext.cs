@@ -5,8 +5,6 @@ namespace BF2042.Scripting
 {
     public partial class HookContext
     {
-        public Helper Helper { get; } = new Helper();
-
         public void AddCondition( BoolValue condition )
         {
 

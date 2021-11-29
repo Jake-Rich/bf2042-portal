@@ -9,16 +9,6 @@ namespace BF2042.Scripting
 
         }
 
-        public T First()
-        {
-            return new CommonValue( PortalInstruction.Array_FirstOf, this );
-        }
-
-        public T Last()
-        {
-            return new CommonValue( PortalInstruction.Array_Last, this );
-        }
-
         public ArrayValue Append( T value )
         {
             return new ArrayValue( PortalInstruction.Array_Append, this, value );
@@ -59,9 +49,23 @@ namespace BF2042.Scripting
             return new ArrayValue( PortalInstruction.Array_RandomizedArray, this );
         }
 
+        public T First()
+        {
+            T value = CommonValue.Factory<T>();
+            value.SetInstructions( PortalInstruction.Array_FirstOf, this );
+            return value;
+        }
+
+        public T Last()
+        {
+            T value = CommonValue.Factory<T>();
+            value.SetInstructions( PortalInstruction.Array_LastOf, this );
+            return value;
+        }
+
         public T RandomValue()
         {
-            T value = Activator.CreateInstance<T>();
+            T value = CommonValue.Factory<T>();
             value.SetInstructions( PortalInstruction.Array_RandomizedArray, this );
             return value;
         }

@@ -10,6 +10,11 @@
 
         }
 
+        internal PlayerValue()
+        {
+
+        }
+
         public TeamValue GetTeam()
         {
             return new TeamValue( PortalInstruction.GetTeamId_Player, this );
@@ -25,17 +30,17 @@
             return new NumberValue( PortalInstruction.GetPlayerDeaths, this );
         }
 
-        public NumberValue GetWeaponReserveAmmo( InventorySlot slot )
+        public NumberValue GetWeaponReserveAmmo( Enum_InventorySlots slot )
         {
             return new NumberValue( PortalInstruction.GetInventoryAmmo, this, EnumValue.Create( slot ) );
         }
 
-        public NumberValue GetWeaponMagazineAmmo( InventorySlot slot )
+        public NumberValue GetWeaponMagazineAmmo( Enum_InventorySlots slot )
         {
             return new NumberValue( PortalInstruction.GetInventoryMagazineAmmo, this, EnumValue.Create( slot ) );
         }
 
-        public ActionValue ApplyMedGadget( MedGadgetTypes type )
+        public ActionValue ApplyMedGadget( Enum_MedGadgetTypes type )
         {
             return new ActionValue( ActionBlockType.ApplyMedGadget, this, EnumValue.Create( type ) );
         }
@@ -52,7 +57,7 @@
         }
 
         [Action]
-        public ActionValue SetActiveSlot( InventorySlot slot )
+        public ActionValue SetActiveSlot( Enum_InventorySlots slot )
         {
             return new  ActionValue( ActionBlockType.ForceSwitchInventory, this, EnumValue.Create( slot ) );
         }
@@ -70,7 +75,7 @@
         }
 
         [Action]
-        public ActionValue Resupply( ResupplyGadgetType type )
+        public ActionValue Resupply( Enum_ResupplyTypes type )
         {
             return new ActionValue( ActionBlockType.Resupply, this, EnumValue.Create( type ) );
         }
@@ -93,7 +98,7 @@
         }
 
         [Action]
-        public ActionValue SetSoldierModel( SoldierModel model )
+        public ActionValue SetSoldierModel( PlayerModelType model )
         {
             return new ActionValue( ActionBlockType.SetPlayerSoldier, this, EnumValue.Create( model ) );
         }
@@ -137,102 +142,102 @@
         }
 
         [Action]
-        public ActionValue SetReserveAmmoCount( InventorySlot slot, NumberValue amount )
+        public ActionValue SetReserveAmmoCount( Enum_InventorySlots slot, NumberValue amount )
         {
             return new ActionValue( ActionBlockType.SetInventoryAmmo, this, EnumValue.Create( slot ), amount );
         }
 
         [Action]
-        public ActionValue SetMagazineAmmoCount( InventorySlot slot, NumberValue amount )
+        public ActionValue SetMagazineAmmoCount( Enum_InventorySlots slot, NumberValue amount )
         {
             return new ActionValue( ActionBlockType.SetInventoryMagazineAmmo, this, EnumValue.Create( slot ), amount );
         }
 
         #region Number Values
 
-        private NumberValue GetPlayerState_Number( PlayerValue_Number num )
+        private NumberValue GetPlayerState_Number( Enum_SoldierStateNumber num )
         {
             return new NumberValue( PortalInstruction.GetPlayerState, this, EnumValue.Create( num ) );
         }
 
         public NumberValue GetHealth()
         {
-            return GetPlayerState_Number( PlayerValue_Number.Health );
+            return GetPlayerState_Number( Enum_SoldierStateNumber.Health );
         }
 
         public NumberValue GetMaxHealth()
         {
-            return GetPlayerState_Number( PlayerValue_Number.MaxHealth );
+            return GetPlayerState_Number( Enum_SoldierStateNumber.MaxHealth );
         }
 
         public NumberValue GetNormalizedHealth()
         {
-            return GetPlayerState_Number( PlayerValue_Number.NormalizedHealth );
+            return GetPlayerState_Number( Enum_SoldierStateNumber.NormalizedHealth );
         }
 
         public NumberValue GetActiveWeaponReserveAmmo()
         {
-            return GetPlayerState_Number( PlayerValue_Number.InventoryAmmoCount );
+            return GetPlayerState_Number( Enum_SoldierStateNumber.InventoryAmmoCount );
         }
 
         public NumberValue GetActiveWeaponMagazineAmmo()
         {
-            return GetPlayerState_Number( PlayerValue_Number.MagazineAmmoCount );
+            return GetPlayerState_Number( Enum_SoldierStateNumber.MagazineAmmoCount );
         }
 
         public NumberValue GetCurrentSpeed()
         {
-            return GetPlayerState_Number( PlayerValue_Number.Speed );
+            return GetPlayerState_Number( Enum_SoldierStateNumber.Speed );
         }
 
         #endregion
 
         #region Bool Values
 
-        private BoolValue GetPlayerState_Bool( PlayerValue_Bool num )
+        private BoolValue GetPlayerState_Bool( Enum_SoldierStateBool num )
         {
             return new BoolValue( PortalInstruction.GetPlayerState, this, EnumValue.Create( num ) );
         }
 
-        public BoolValue IsAI { get { return GetPlayerState_Bool( PlayerValue_Bool.IsAI ); } }
-        public BoolValue IsAlive { get { return GetPlayerState_Bool( PlayerValue_Bool.IsAlive ); } }
-        public BoolValue IsBeingRevived { get { return GetPlayerState_Bool( PlayerValue_Bool.IsBeingRevived ); } }
-        public BoolValue IsCrouching { get { return GetPlayerState_Bool( PlayerValue_Bool.IsCrouching ); } }
-        public BoolValue IsDead { get { return GetPlayerState_Bool( PlayerValue_Bool.IsDead ); } }
-        public BoolValue IsFiring { get { return GetPlayerState_Bool( PlayerValue_Bool.IsFiring ); } }
-        public BoolValue IsInAir { get { return GetPlayerState_Bool( PlayerValue_Bool.IsInAir ); } }
-        public BoolValue IsInteracting { get { return GetPlayerState_Bool( PlayerValue_Bool.IsInteracting ); } }
-        public BoolValue IsInVehicle { get { return GetPlayerState_Bool( PlayerValue_Bool.IsInVehicle ); } }
-        public BoolValue IsInWater { get { return GetPlayerState_Bool( PlayerValue_Bool.IsInWater ); } }
-        public BoolValue IsJumping { get { return GetPlayerState_Bool( PlayerValue_Bool.IsJumping ); } }
-        public BoolValue IsDowned { get { return GetPlayerState_Bool( PlayerValue_Bool.IsDowned ); } }
-        public BoolValue IsOnGround { get { return GetPlayerState_Bool( PlayerValue_Bool.IsOnGround ); } }
-        public BoolValue IsParachuting { get { return GetPlayerState_Bool( PlayerValue_Bool.IsParachuting ); } }
-        public BoolValue IsProne { get { return GetPlayerState_Bool( PlayerValue_Bool.IsProne ); } }
-        public BoolValue IsReloading { get { return GetPlayerState_Bool( PlayerValue_Bool.IsReloading ); } }
-        public BoolValue IsReviving { get { return GetPlayerState_Bool( PlayerValue_Bool.IsReviving ); } }
-        public BoolValue IsSprinting { get { return GetPlayerState_Bool( PlayerValue_Bool.IsSprinting ); } }
-        public BoolValue IsStanding { get { return GetPlayerState_Bool( PlayerValue_Bool.IsStanding ); } }
-        public BoolValue IsVaulting { get { return GetPlayerState_Bool( PlayerValue_Bool.IsVaulting ); } }
-        public BoolValue IsZoomingIn { get { return GetPlayerState_Bool( PlayerValue_Bool.IsZoomingIn ); } }
+        public BoolValue IsAI { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsAI ); } }
+        public BoolValue IsAlive { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsAlive ); } }
+        public BoolValue IsBeingRevived { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsBeingRevived ); } }
+        public BoolValue IsCrouching { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsCrouching ); } }
+        public BoolValue IsDead { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsDead ); } }
+        public BoolValue IsFiring { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsFiring ); } }
+        public BoolValue IsInAir { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsInAir ); } }
+        public BoolValue IsInteracting { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsInteracting ); } }
+        public BoolValue IsInVehicle { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsInVehicle ); } }
+        public BoolValue IsInWater { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsInWater ); } }
+        public BoolValue IsJumping { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsJumping ); } }
+        public BoolValue IsDowned { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsDowned ); } }
+        public BoolValue IsOnGround { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsOnGround ); } }
+        public BoolValue IsParachuting { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsParachuting ); } }
+        public BoolValue IsProne { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsProne ); } }
+        public BoolValue IsReloading { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsReloading ); } }
+        public BoolValue IsReviving { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsReviving ); } }
+        public BoolValue IsSprinting { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsSprinting ); } }
+        public BoolValue IsStanding { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsStanding ); } }
+        public BoolValue IsVaulting { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsVaulting ); } }
+        public BoolValue IsZoomingIn { get { return GetPlayerState_Bool( Enum_SoldierStateBool.IsZoomingIn ); } }
 
         #endregion
 
         #region Vector Values
 
-        private VectorValue GetPlayerState_Vector( PlayerValue_Vector num )
+        private VectorValue GetPlayerState_Vector( Enum_SoldierStateVector num )
         {
             return new VectorValue( PortalInstruction.GetPlayerState, this, EnumValue.Create( num ) );
         }
 
         public VectorValue GetLinearVelocity()
         {
-            return GetPlayerState_Vector( PlayerValue_Vector.LinearVelocity );
+            return GetPlayerState_Vector( Enum_SoldierStateVector.LinearVelocity );
         }
 
         public VectorValue GetPosition()
         {
-            return GetPlayerState_Vector( PlayerValue_Vector.Position );
+            return GetPlayerState_Vector( Enum_SoldierStateVector.Position );
         }
 
         #endregion
